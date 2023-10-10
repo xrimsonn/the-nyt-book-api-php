@@ -36,7 +36,6 @@ if ($data === null) {
   <main class="container">
     <nav aria-label="breadcrumb">
       <ul>
-        <li><a href="#">The New York Times</a></li>
         <li><a href="#">Books</a></li>
         <li>Best Sellers</li>
       </ul>
@@ -47,12 +46,12 @@ if ($data === null) {
     </hgroup>
     <div>
   <?php
-  $contador = 0; // Contador para llevar un registro de los libros procesados
+  $i = 0; // Un contador para llevar un registro de los libros procesados
   foreach ($data['results']['lists'] as $list) {
     foreach ($list['books'] as $book) {
       if (isset($book['book_image'])) {
         // Comienza un nuevo div cada vez que se procesan 3 libros
-        if ($contador % 3 === 0) {
+        if ($i % 3 === 0) {
           echo '<div class="grid">';
         }
         // Abre un nuevo artículo
@@ -65,9 +64,9 @@ if ($data === null) {
         echo '<p>' . $book['description'] . '</p>';
         echo '<footer>' . $list['list_name'] . '</footer>';
         echo '</article>';
-        $contador++;
+        $i++;
         // Cierra un div después de procesar 3 libros
-        if ($contador % 3 === 0) {
+        if ($i % 3 === 0) {
           echo '</div>';
         }
       }
@@ -75,9 +74,9 @@ if ($data === null) {
   }
   
   // Cierra cualquier div restante si no se alcanzan múltiplos de 3
-  while ($contador % 3 !== 0) {
+  while ($i % 3 !== 0) {
     echo '<article id="mt" style="visibility: hidden;"></article>';
-    $contador++;
+    $i++;
   }
   ?>
 </div>
