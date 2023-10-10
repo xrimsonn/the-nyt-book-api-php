@@ -41,7 +41,10 @@ if ($data === null) {
         <li>Best Sellers</li>
       </ul>
     </nav>
-    <h1 id="mb">The New York Times Best Sellers</h1>
+    <hgroup>
+      <h1 id="mb">The New York Times Best Sellers</h1>
+      <p>By José Antonio Rosales</p>
+    </hgroup>
     <div>
   <?php
   $contador = 0; // Contador para llevar un registro de los libros procesados
