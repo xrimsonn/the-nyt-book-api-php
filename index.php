@@ -43,41 +43,50 @@ if ($data === null) {
       <p>By José Antonio Rosales</p>
     </hgroup>
     <div>
-  <?php
-  $i = 0; // Un contador para llevar un registro de los libros procesados
-  foreach ($data['results']['lists'] as $list) {
-    foreach ($list['books'] as $book) {
-      if (isset($book['book_image'])) {
-        // Comienza un nuevo div cada vez que se procesan 3 libros
-        if ($i % 3 === 0) {
-          echo '<div class="grid">';
+      <?php
+      $i = 0; // Un contador para llevar un registro de los libros procesados
+      foreach ($data['results']['lists'] as $list) {
+        foreach ($list['books'] as $book) {
+          if (isset($book['book_image'])) {
+            // Comienza un nuevo div cada vez que se procesan 3 libros
+            if ($i % 3 === 0) {
+      ?>
+              <div class="grid">
+              <?php
+            }
+            // Abre un nuevo artículo
+              ?>
+              <article id="mt">
+                <img src="<?= $book['book_image'] ?>" alt="Portada del libro">
+                <hgroup>
+                  <h3><?= $book['title'] ?></h3>
+                  <p><?= $book['author'] ?></p>
+                </hgroup>
+                <p><?= $book['description'] ?></p>
+                <footer><?= $list['list_name'] ?></footer>
+              </article>
+              <?php
+              $i++;
+
+              if ($i % 3 === 0) {
+              ?>
+              </div>
+        <?php
+              }
+            }
+          }
         }
-        // Abre un nuevo artículo
-        echo '<article id="mt">';
-        echo '<img src="' . $book['book_image'] . '" alt="Portada del libro">';
-        echo '<hgroup>';
-        echo '<h3>' . $book['title'] . '</h3>';
-        echo '<p>' . $book['author'] . '</p>';
-        echo '</hgroup>';
-        echo '<p>' . $book['description'] . '</p>';
-        echo '<footer>' . $list['list_name'] . '</footer>';
-        echo '</article>';
-        $i++;
-        // Cierra un div después de procesar 3 libros
-        if ($i % 3 === 0) {
-          echo '</div>';
+
+        // Cierra cualquier div restante si no se alcanzan múltiplos de 3
+        while ($i % 3 !== 0) {
+        ?>
+        <article id="mt" style="visibility: hidden;"></article>
+      <?php
+          $i++;
         }
-      }
-    }
-  }
-  
-  // Cierra cualquier div restante si no se alcanzan múltiplos de 3
-  while ($i % 3 !== 0) {
-    echo '<article id="mt" style="visibility: hidden;"></article>';
-    $i++;
-  }
-  ?>
-</div>
+      ?>
+
+    </div>
 
 
   </main>
