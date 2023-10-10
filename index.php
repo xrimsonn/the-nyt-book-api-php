@@ -19,8 +19,6 @@ if ($data === null) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 
